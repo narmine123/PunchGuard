@@ -1,0 +1,14 @@
+<div class="login-container">
+  <h2>Authentification</h2>
+  
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <label>Email:</label>
+    <input type="email" formControlName="email" placeholder="Email">
+    <label>Mot de passe:</label>
+    <input type="password" formControlName="password" placeholder="Mot de passe">
+    
+    <button type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+  </form>
+  
+  <p>Pas encore de compte ? <a routerLink="/auth/signup">S'inscrire</a></p>
+</div>

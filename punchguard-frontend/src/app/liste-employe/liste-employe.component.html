@@ -1,0 +1,34 @@
+
+<h2>Liste des employés</h2>
+
+<div class="component ">
+
+<ul>
+  <li *ngFor="let emp of employes" (click)="selectEmploye(emp)" 
+  [class.selected]="emp === selectedEmploye">
+  <!--mettre en évidence visuellement l'employé sélectionné.-->
+      {{ emp.nom }} {{ emp.prenom }}    - {{ emp.poste }}
+
+</li></ul>
+
+<div *ngIf="selectedEmploye">
+  <h3>Détails de l'employé sélectionné</h3>
+  <p><strong>Nom:</strong> {{ selectedEmploye.nom }}</p>
+  <p><strong>Prénom:</strong> {{ selectedEmploye.prenom }}</p>
+  <p><strong>Email:</strong> {{ selectedEmploye.email }}</p>
+  <p><strong>Poste:</strong> {{ selectedEmploye.poste }}</p>
+
+
+    <button (click)="router.navigate(['/modifier', selectedEmploye.id])">Modifier</button>
+
+    <button (click)="deleteEmploye(selectedEmploye.id)">Supprimer</button>
+
+   
+</div>
+
+<!-- L’opérateur ?. (appelé safe navigation operator) empêche l'erreur si selectedEmploye est undefined.
+
+-->
+
+
+</div>
