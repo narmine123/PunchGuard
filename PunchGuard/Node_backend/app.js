@@ -5,6 +5,9 @@ const employeRoutes = require('./routes/employe.routes');
 const pool = require('./init/connect');
 const app = express();
 
+
+app.use(cors(corsOptions));
+
 // Middlewares
 app.use(cors({
   origin: 'http://localhost:4200', 
@@ -26,11 +29,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Erreur interne' });
 });
 
-app.post('/test', (req, res) => {
-  console.log(' Route /test atteinte');
-  console.log('Données reçues:', req.body);
-  res.json({ message: 'Mot de passe bien reçu' });
-});
 // Démarrage
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

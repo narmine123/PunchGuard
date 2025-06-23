@@ -146,6 +146,22 @@ router.post('/login', (req, res) => {
 });
 
 
+router.get('/pointages', (req, res) => {
+  pool.query('SELECT * FROM pointages', (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+
+router.get('/pointages/:id', (req, res) => {
+  const id = req.params.id;
+  pool.query('SELECT * FROM pointages WHERE employe_id = ?', [id], (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
 
 module.exports = router;
 

@@ -1,0 +1,20 @@
+<h2>Liste des pointages</h2>
+
+<table class="pointages-table">
+  <thead>
+    <tr>
+      <th>Employé</th>
+      <th>Date</th>
+      <th>Entrée</th>
+      <th>Sortie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of pointages">
+      <td>{{ p.employe_id }}</td>
+      <td>{{ p.date }}</td>
+      <td>{{ p.heure_entree }}</td>
+      <td>{{ p.heure_sortie }}</td>
+    </tr>
+  </tbody>
+</table>

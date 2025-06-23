@@ -51,7 +51,10 @@ export class ListeEmployeComponent implements OnInit {
         error: (err) => console.error('Erreur suppression', err)
       });
     }
+   
   }
+
+  
   
  
 
