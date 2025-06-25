@@ -6,8 +6,6 @@ const pool = require('./init/connect');
 const app = express();
 
 
-app.use(cors(corsOptions));
-
 // Middlewares
 app.use(cors({
   origin: 'http://localhost:4200', 
@@ -20,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/employes', employeRoutes);
 app.use(express.json());
+
 
 // Gestion des erreurs centralisée
 app.use((err, req, res, next) => {

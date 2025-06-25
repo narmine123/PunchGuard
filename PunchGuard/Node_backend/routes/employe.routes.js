@@ -5,6 +5,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 router.get('/ListeEmploye', (req, res) => {
   pool.query('SELECT * FROM employe', (err, results) => {
     if (err) {
@@ -146,7 +147,7 @@ router.post('/login', (req, res) => {
 });
 
 
-router.get('/pointages', (req, res) => {
+/*router.get('/pointages', (req, res) => {
   pool.query('SELECT * FROM pointages', (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
@@ -160,7 +161,97 @@ router.get('/pointages/:id', (req, res) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
+});*/
+
+/*router.post('/pointage', (req, res) => {
+  const { employe_id, date, heure } = req.body;
+
+  // Vérifier que toutes les valeurs sont bien fournies
+  if (!employe_id || !date || !heure) {
+    return res.status(400).json({ message: 'Champs requis manquants', payload: { employe_id, date, heure } });
+  }
+
+  // Vérifier si un pointage existe déjà pour aujourd'hui
+  const checkSql = 'SELECT * FROM pointages WHERE employe_id = ? AND date = ?';
+  pool.query(checkSql, [employe_id, date], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Erreur vérification', err });
+
+    if (results.length === 0) {
+      // 👇 Aucun pointage → insérer comme heure d’entrée
+      const insertSql = 'INSERT INTO pointages (employe_id, date, heure_entree) VALUES (?, ?, ?)';
+      pool.query(insertSql, [employe_id, date, heure], (err) => {
+        if (err) return res.status(500).json({ message: 'Erreur insertion', err });
+        res.json({ message: ' Heure d’entrée enregistrée avec succès' });
+      });
+    } else {
+      // 👇 Pointage déjà existant → mettre à jour heure de sortie
+      const updateSql = 'UPDATE pointages SET heure_sortie = ? WHERE employe_id = ? AND date = ?';
+      pool.query(updateSql, [heure, employe_id, date], (err) => {
+        if (err) return res.status(500).json({ message: 'Erreur mise à jour', err });
+        res.json({ message: 'Heure de sortie mise à jour avec succès' });
+      });
+    }
+  });
 });
+
+
+*/
+router.post('/ping', (req, res) => {
+  const { employeId } = req.body;
+  const now = new Date();
+  const date = now.toISOString().slice(0, 10); // yyyy-mm-dd
+  const heure = now.toTimeString().slice(0, 8); // hh:mm:ss
+
+  if (!employeId) {
+    return res.status(400).json({ message: 'employeId requis' });
+  }
+
+  const check = `SELECT * FROM pointages WHERE employe_id = ? AND date = ?`;
+
+  pool.query(check, [employeId, date], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Erreur SQL' });
+
+    if (results.length > 0) {
+      const update = `UPDATE pointages SET heure_sortie = ? WHERE employe_id = ? AND date = ?`;
+      pool.query(update, [heure, employeId, date], (err) => {
+        if (err) return res.status(500).json({ message: 'Erreur update' });
+        res.json({ message: 'Heure de sortie mise à jour.' });
+      });
+    } else {
+      const insert = `INSERT INTO pointages (employe_id, date, heure_entree) VALUES (?, ?, ?)`;
+      pool.query(insert, [employeId, date, heure], (err) => {
+        if (err) return res.status(500).json({ message: 'Erreur insert' });
+        res.json({ message: 'Heure d’entrée enregistrée.' });
+      });
+    }
+  });
+});
+
+
+
+// Route GET corrigée
+router.get('/pointages/:id', (req, res) => {
+  const id = req.params.id;
+  
+  // Validation simple de l'ID
+  if (isNaN(id)) {
+    return res.status(400).json({ error: "L'ID doit être un nombre" });
+  }
+
+  pool.query('SELECT * FROM pointages WHERE employe_id = ?', [id], (err, results) => {
+    if (err) {
+      console.error('Erreur MySQL:', err);
+      return res.status(500).json({ error: 'Erreur serveur' });
+    }
+    
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Aucun pointage trouvé' });
+    }
+    
+    res.json(results);
+  });
+});
+
 
 
 module.exports = router;
