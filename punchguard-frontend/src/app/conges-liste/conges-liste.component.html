@@ -1,1 +1,26 @@
-<p>conges-liste works!</p>
+<h2>Les Congés d'un employé</h2>
+
+<table class="conges-table">
+  <thead>
+    <tr>
+      <th>Employé</th>
+      <th>Date Début</th>
+      <th>Date Fin</th>
+      <th>Nombre de jours</th>
+      <th>Type</th>
+      <th>Statut</th>
+      <th>Date de demande</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of conges">
+      <td>{{ c.employeId }}</td>
+      <td>{{ c.dateDebut  }}</td>
+      <td>{{ c.dateFin }}</td>
+      <td>{{ c.nombreJours }}</td>
+      <td>{{ c.type }}</td>
+      <td>{{ c.statut }}</td>
+      <td>{{ c.dateDemande  }}</td>
+    </tr>
+  </tbody>
+</table>

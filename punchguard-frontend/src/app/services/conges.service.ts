@@ -15,4 +15,8 @@ export class CongesService {
   ajouterConge(conge: Conge):Observable<any>{
     return this.http.post(`${this.apiUrl}/addConges`,conge)
   }
+
+   getCongesByEmployeId(id: number) {
+    return this.http.get<any[]>(`${this.apiUrl}/conges/${id}`);
+  }
 }

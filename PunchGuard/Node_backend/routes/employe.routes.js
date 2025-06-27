@@ -203,6 +203,38 @@ router.post('/addConges', (req, res) => {
   });
 });
 
+
+router.get('/conges/:id', (req, res) => {
+  const employeId = req.params.id;
+
+  const sql = `
+    SELECT
+      id,
+      employeId,
+      dateDebut,
+      dateFin,
+      type,
+      statut,
+      dateDemande,
+      DATEDIFF(dateFin, dateDebut) + 1 AS nombreJours
+    FROM conges
+    WHERE employeId = ?
+    ORDER BY dateDebut DESC
+  `;
+
+  pool.query(sql, [employeId], (err, results) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des congés :', err);
+      return res.status(500).json({ message: 'Erreur serveur' });
+    }
+
+    res.json(results);
+  });
+});
+
 module.exports = router;
+
+
+
 
 
