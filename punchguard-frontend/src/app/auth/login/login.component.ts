@@ -49,7 +49,6 @@ onLogin() {
     this.errorMessage = 'Formulaire invalide';
     return;
   }
-
   const email = this.loginForm.get('email')?.value;
   const password = this.loginForm.get('password')?.value;
 

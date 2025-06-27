@@ -19,7 +19,7 @@ import { CongesListeComponent } from './conges-liste/conges-liste.component';
 
   { path: 'conges/:id', component: CongesComponent },
   { path: 'demandeConges', component: CongesDemandeComponent },
-  { path: 'listeConges/:id', component: CongesListeComponent },
+  { path: 'congesListe', component: CongesListeComponent },
 
 
 

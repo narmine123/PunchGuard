@@ -25,7 +25,7 @@ export class ListeEmployeComponent implements OnInit {
   this.employeService.getEmployes().subscribe({
     next: (data) => {
       this.employes = data;
-      console.log('Employés récupérés:', data); 
+      console.log('Employés récupérés:'); 
     },
     error: (err) => console.error('Erreur chargement employés', err)
   });

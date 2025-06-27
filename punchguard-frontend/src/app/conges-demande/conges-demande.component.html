@@ -1,1 +1,25 @@
-<p>conges-demande works!</p>
+<h2>Demande de congé</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>Date début : </label>
+    <input type="date" formControlName="dateDebut">
+
+    <label>Date fin : </label>
+    <input type="date" formControlName="dateFin">
+
+    <label>type : </label>
+    <select formControlName="type">
+        <option value="">-- Sélectionner --</option>
+        <option value="Annuel">Annuel</option>
+        <option value="Maladie">Maladie</option>
+        <option value="Exceptionnel">Exceptionnel</option>
+    </select>
+
+
+    <button type="submit">Envoyer</button>
+
+
+
+
+
+</form>

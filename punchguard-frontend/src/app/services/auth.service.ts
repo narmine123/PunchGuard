@@ -1,7 +1,8 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,4 +18,20 @@ export class AuthService {
   login(credentials: { email: string, password: string }) {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials);
   }
+
+
+getEmployeId(): number | null {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+
+  try {
+  const decoded: any = jwtDecode(token);
+    return decoded.id;
+  } catch (err) {
+    console.error("Erreur lors du décodage du token :", err);
+    return null;
+  }
+}
+
+
 }

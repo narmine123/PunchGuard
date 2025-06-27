@@ -52,7 +52,6 @@ router.post('/AddEmploye', (req, res) => {
   );
 });
 
-
 router.put('/UpdateEmploye/:id', (req, res) => {
   const { id } = req.params;
   const { nom, prenom, email, poste } = req.body;
@@ -69,8 +68,6 @@ router.put('/UpdateEmploye/:id', (req, res) => {
     }
   );
 });
-
-
 
 router.delete('/DeleteEmploye/:id', (req, res) => {
   const employeeId = req.params.id;
@@ -114,13 +111,9 @@ router.delete('/DeleteEmploye/:id', (req, res) => {
   );
 });
 
-
-
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
-
   console.log(' Requête login:', req.body.email);
-
   const sql = 'SELECT * FROM employe WHERE email = ?';
   pool.query(sql, [email], async (err, results) => {
     if (err) return res.status(500).json({ message: 'Erreur serveur' });
@@ -128,74 +121,15 @@ router.post('/login', (req, res) => {
     if (results.length === 0) {
       return res.status(401).json({ message: 'Email invalide' });
     }
-
     const user = results[0];
-
     if (!password || !user.mot_de_passe) {
       return res.status(400).json({ message: 'Mot de passe manquant' });
     }
-
-    /*const match = await bcrypt.compare(password, user.mot_de_passe);
-
-    if (!match) {
-      return res.status(401).json({ message: 'Mot de passe incorrect' });
-    }*/
-
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'default_secret', { expiresIn: '1h' });
     res.json({ message: 'Connexion réussie', token });
   });
 });
 
-
-/*router.get('/pointages', (req, res) => {
-  pool.query('SELECT * FROM pointages', (err, results) => {
-    if (err) return res.status(500).send(err);
-    res.json(results);
-  });
-});
-
-
-router.get('/pointages/:id', (req, res) => {
-  const id = req.params.id;
-  pool.query('SELECT * FROM pointages WHERE employe_id = ?', [id], (err, results) => {
-    if (err) return res.status(500).send(err);
-    res.json(results);
-  });
-});*/
-
-/*router.post('/pointage', (req, res) => {
-  const { employe_id, date, heure } = req.body;
-
-  // Vérifier que toutes les valeurs sont bien fournies
-  if (!employe_id || !date || !heure) {
-    return res.status(400).json({ message: 'Champs requis manquants', payload: { employe_id, date, heure } });
-  }
-
-  // Vérifier si un pointage existe déjà pour aujourd'hui
-  const checkSql = 'SELECT * FROM pointages WHERE employe_id = ? AND date = ?';
-  pool.query(checkSql, [employe_id, date], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Erreur vérification', err });
-
-    if (results.length === 0) {
-      // 👇 Aucun pointage → insérer comme heure d’entrée
-      const insertSql = 'INSERT INTO pointages (employe_id, date, heure_entree) VALUES (?, ?, ?)';
-      pool.query(insertSql, [employe_id, date, heure], (err) => {
-        if (err) return res.status(500).json({ message: 'Erreur insertion', err });
-        res.json({ message: ' Heure d’entrée enregistrée avec succès' });
-      });
-    } else {
-      // 👇 Pointage déjà existant → mettre à jour heure de sortie
-      const updateSql = 'UPDATE pointages SET heure_sortie = ? WHERE employe_id = ? AND date = ?';
-      pool.query(updateSql, [heure, employe_id, date], (err) => {
-        if (err) return res.status(500).json({ message: 'Erreur mise à jour', err });
-        res.json({ message: 'Heure de sortie mise à jour avec succès' });
-      });
-    }
-  });
-});
-
-
-*/
 router.post('/ping', (req, res) => {
   const { employeId } = req.body;
   const now = new Date();
@@ -227,14 +161,9 @@ router.post('/ping', (req, res) => {
   });
 });
 
-
-
-// Route GET corrigée
 router.get('/pointages/:id', (req, res) => {
   const id = req.params.id;
-  
-  // Validation simple de l'ID
-  if (isNaN(id)) {
+    if (isNaN(id)) {
     return res.status(400).json({ error: "L'ID doit être un nombre" });
   }
 
@@ -252,7 +181,27 @@ router.get('/pointages/:id', (req, res) => {
   });
 });
 
+router.post('/addConges', (req, res) => {
+  const { employeId, dateDebut, dateFin, type } = req.body;
 
+  if (!employeId || !dateDebut || !dateFin || !type) {
+    return res.status(400).json({ message: 'Champs requis manquants' });
+  }
+
+  const sql = `
+    INSERT INTO conges (employeId, dateDebut, dateFin, type, dateDemande)
+    VALUES (?, ?, ?, ?, CURDATE())
+  `;
+
+  pool.query(sql, [employeId, dateDebut, dateFin, type], (err, result) => {
+    if (err) {
+      console.error('[Erreur MySQL]', err);
+      return res.status(500).json({ message: 'Erreur serveur lors de l\'ajout du congé' });
+    }
+
+    return res.status(201).json({ message: ' Demande de congé enregistrée avec succès' });
+  });
+});
 
 module.exports = router;
 
