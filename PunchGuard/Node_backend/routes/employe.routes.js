@@ -181,60 +181,12 @@ router.get('/pointages/:id', (req, res) => {
   });
 });
 
-router.post('/addConges', (req, res) => {
-  const { employeId, dateDebut, dateFin, type } = req.body;
-
-  if (!employeId || !dateDebut || !dateFin || !type) {
-    return res.status(400).json({ message: 'Champs requis manquants' });
-  }
-
-  const sql = `
-    INSERT INTO conges (employeId, dateDebut, dateFin, type, dateDemande)
-    VALUES (?, ?, ?, ?, CURDATE())
-  `;
-
-  pool.query(sql, [employeId, dateDebut, dateFin, type], (err, result) => {
-    if (err) {
-      console.error('[Erreur MySQL]', err);
-      return res.status(500).json({ message: 'Erreur serveur lors de l\'ajout du congé' });
-    }
-
-    return res.status(201).json({ message: ' Demande de congé enregistrée avec succès' });
-  });
-});
 
 
-router.get('/conges/:id', (req, res) => {
-  const employeId = req.params.id;
 
-  const sql = `
-    SELECT
-      id,
-      employeId,
-      dateDebut,
-      dateFin,
-      type,
-      statut,
-      dateDemande,
-      DATEDIFF(dateFin, dateDebut) + 1 AS nombreJours
-    FROM conges
-    WHERE employeId = ?
-    ORDER BY dateDebut DESC
-  `;
 
-  pool.query(sql, [employeId], (err, results) => {
-    if (err) {
-      console.error('Erreur lors de la récupération des congés :', err);
-      return res.status(500).json({ message: 'Erreur serveur' });
-    }
-
-    res.json(results);
-  });
-});
 
 module.exports = router;
-
-
 
 
 

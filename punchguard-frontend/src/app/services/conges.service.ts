@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CongesService {
 
-  private apiUrl ='http://localhost:3000/api/employes';
+  private apiUrl ='http://localhost:3000/api/conges';
   constructor(private http:HttpClient) { }
 
 
@@ -17,6 +17,6 @@ export class CongesService {
   }
 
    getCongesByEmployeId(id: number) {
-    return this.http.get<any[]>(`${this.apiUrl}/conges/${id}`);
+    return this.http.get<any[]>(`${this.apiUrl}/ListeConges/${id}`);
   }
 }

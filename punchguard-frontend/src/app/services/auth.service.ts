@@ -19,13 +19,16 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials);
   }
 
-
 getEmployeId(): number | null {
+  if (typeof localStorage === 'undefined') {
+    return null;
+  }
+
   const token = localStorage.getItem('token');
   if (!token) return null;
 
   try {
-  const decoded: any = jwtDecode(token);
+    const decoded: any = jwtDecode(token);
     return decoded.id;
   } catch (err) {
     console.error("Erreur lors du décodage du token :", err);

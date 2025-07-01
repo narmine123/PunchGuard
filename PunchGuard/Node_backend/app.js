@@ -19,6 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/employes', employeRoutes);
 app.use(express.json());
 
+const congeRoutes = require('./routes/conges'); 
+app.use('/api/conges', congeRoutes);
+
 
 // Gestion des erreurs centralisée
 app.use((err, req, res, next) => {
