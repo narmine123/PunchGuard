@@ -29,7 +29,7 @@ function envoyerEmailDemandeConge({ employeId, dateDebut, dateFin, type, id }) {
     to: 'narmine.haddad@etudiant-fst.utm.tn',
     subject: `Nouvelle demande de congé - Employé #${employeId}`,
     text: `Un employé (ID: ${employeId}) a demandé un congé de type "${type}" du ${dateDebut} au ${dateFin}.`,
-    html: html // 🔴 Ceci est essentiel pour afficher les boutons dans l’email
+    html: html //Ceci est essentiel pour afficher les boutons dans l’email
   };
 
   return transporter.sendMail(mailOptions);

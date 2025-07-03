@@ -15,7 +15,7 @@ router.post('/addConges', (req, res) => {
 
   const sql = `
     INSERT INTO conges (employeId, dateDebut, dateFin, type, dateDemande)
-    VALUES (?, ?, ?, ?, CURDATE())
+    VALUES (?, ?, ?, ?, NOW())
   `;
 
   pool.query(sql, [employeId, dateDebut, dateFin, type], async (err, result) => {

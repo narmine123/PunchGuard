@@ -1,62 +1,181 @@
+/* Reset et base - Version corrigée */
+html, body {
+    overflow: hidden; /* Désactive complètement le scroll */
+    height: 100vh; /* Utilise viewport height au lieu de 250vh */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
 .login-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 40px;
-  background-color: #f8f9fa;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
+/* Carte du formulaire - Version optimisée */
+.login-container form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; /* Centrage horizontal */
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Corrections apportées :
+1. Remplacement de height: 250vh par 100vh pour body
+2. Ajout de min-height: 100vh pour le conteneur
+3. Simplification des déclarations de largeur
+4. Meilleure gestion du box-model
+5. Centrage amélioré du formulaire
+*/
+
+/* Le reste de votre CSS est déjà bien optimisé */
+
+/* Titre - Même style que signup */
 .login-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #343a40;
+    color: #5e72e4;
+    text-align: center;
+   font-size: 1.8rem;
+    font-weight: 600;
+        margin-bottom: 1.5rem;
+
+    letter-spacing: -0.5px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+/* Labels - Ajouté pour cohérence */
+.login-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-input[type="email"],
-input[type="password"] {
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  border: 1px solid #ced4da;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: border 0.3s;
+/* Champs de formulaire - Identique à signup */
+.login-container input {
+    width: 100%;
+    box-sizing: border-box; /* Inclut padding dans la largeur */
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 2px solid #edf2f7;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: #f8fafc;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
-  border-color: #495057;
-  outline: none;
+.login-container input:focus {
+    outline: none;
+    border-color: #5e72e4;
+    box-shadow: 0 0 0 3px rgba(94, 114, 228, 0.2);
+    background-color: white;
+    transform: translateY(-2px);
 }
 
-button[type="submit"] {
-  background-color: #007bff;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.login-container input::placeholder {
+    color: #a0aec0;
 }
 
-button[type="submit"]:hover:not(:disabled) {
-  background-color: #0056b3;
+/* Bouton - Même style dégradé */
+.login-container button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, #5e72e4, #825ee4);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 6px rgba(94, 114, 228, 0.2);
 }
 
-button[type="submit"]:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
+.login-container button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(94, 114, 228, 0.3);
 }
 
-p {
-  margin-top: 16px;
-  text-align: center;
+.login-container button:disabled {
+    background: #cbd5e0;
+    transform: none;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Lien - Style cohérent */
+.login-container p {
+    text-align: center;
+    margin-top: 1.8rem;
+    color: #718096;
+    font-size: 0.95rem;
+}
+
+.login-container a {
+    color: #5e72e4;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.login-container a:hover {
+    color: #434190;
+    text-decoration: underline;
+}
+
+/* Animation identique */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-container form {
+    animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Responsive - Même breakpoint */
+@media (max-width: 480px) {
+    .login-container form {
+        padding: 1.8rem;
+    }
+    
+    .login-container h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Option : Ajout d'un icône pour le mot de passe */
+.password-field {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 42px;
+    cursor: pointer;
+    color: #a0aec0;
+    transition: all 0.2s;
+}
+
+.password-toggle:hover {
+    color: #5e72e4;
 }

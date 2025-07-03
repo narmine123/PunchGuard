@@ -4,6 +4,7 @@ import { CongesService } from '../services/conges.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-conges-demande',
@@ -19,7 +20,8 @@ export class CongesDemandeComponent {
     private fb: FormBuilder,
     private congeService: CongesService,
     private route: ActivatedRoute,
-    private authService:AuthService
+    private authService:AuthService,
+    public router:Router
   ) {
     this.form = this.fb.group({
       employeId:this.authService.getEmployeId(),

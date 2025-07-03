@@ -134,6 +134,7 @@ router.post('/ping', (req, res) => {
   const { employeId } = req.body;
   const now = new Date();
   const date = now.toISOString().slice(0, 10); // yyyy-mm-dd
+  
   const heure = now.toTimeString().slice(0, 8); // hh:mm:ss
 
   if (!employeId) {

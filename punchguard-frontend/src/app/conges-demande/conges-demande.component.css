@@ -1,49 +1,151 @@
+/* Style général */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    color: #2d3748;
+}
+
+/* Conteneur du formulaire */
 form {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  font-family: Arial, sans-serif;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 500px;
+    animation: fadeInUp 0.6s ease-out;
 }
 
+/* Titre */
 h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+    color: #5e72e4;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: relative;
 }
 
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #5e72e4, #825ee4);
+    border-radius: 2px;
+}
+
+/* Labels */
 label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #555;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-top: 1.2rem;
 }
 
+/* Champs de formulaire */
 input[type="date"],
 select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #edf2f7;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: #f8fafc;
+    color: #4a5568;
 }
 
+input[type="date"]:focus,
+select:focus {
+    outline: none;
+    border-color: #5e72e4;
+    box-shadow: 0 0 0 3px rgba(94, 114, 228, 0.2);
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+/* Boutons */
 button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  margin-top: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    width: 100%;
+    padding: 14px;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+button[type="submit"] {
+    background: linear-gradient(to right, #5e72e4, #825ee4);
+    color: white;
+    box-shadow: 0 4px 15px rgba(94, 114, 228, 0.3);
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(94, 114, 228, 0.4);
+}
+
+button:not([type="submit"]) {
+    background: white;
+    color: #5e72e4;
+    border: 2px solid #5e72e4;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(94, 114, 228, 0.1);
+}
+
+button:not([type="submit"]):hover {
+    background: #f8f9fe;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(94, 114, 228, 0.2);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Style pour le sélecteur */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    form {
+        padding: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+.container{
+  margin-left: 350px;
 }

@@ -1,3 +1,4 @@
+
 <h2>Liste des pointages</h2>
 
 <table class="pointages-table">
@@ -12,9 +13,11 @@
   <tbody>
     <tr *ngFor="let p of pointages">
       <td>{{ p.employe_id }}</td>
-      <td>{{ p.date }}</td>
+      <td>{{ p.date | date:'dd/MM/yyyy '}}</td>
       <td>{{ p.heure_entree }}</td>
       <td>{{ p.heure_sortie }}</td>
     </tr>
   </tbody>
 </table>
+
+
