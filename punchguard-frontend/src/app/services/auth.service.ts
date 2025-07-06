@@ -37,4 +37,15 @@ getEmployeId(): number | null {
 }
 
 
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token'); 
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
 }
+
+
+

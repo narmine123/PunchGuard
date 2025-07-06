@@ -1,0 +1,31 @@
+.custom-navbar {
+  background-color: #798aec!important;
+  border-bottom: 1px solid #3a3a5a;
+}
+
+.navbar-nav .nav-link {
+  color: #f0f0f0 !important;
+  font-weight: 500;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #9f8fff !important; /* accent violet pour correspondre au bouton */
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.btn-outline-light {
+  border-color: #9f8fff;
+  color: #ffffff;
+}
+
+.btn-outline-light:hover {
+  background-color: #9f8fff;
+  border-color: #9f8fff;
+  color: #fff;
+}

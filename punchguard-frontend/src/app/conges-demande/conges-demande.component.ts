@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CongesService } from '../services/conges.service';
 import { ActivatedRoute } from '@angular/router';
@@ -31,14 +31,6 @@ export class CongesDemandeComponent {
     });
   }
 
-  /*onSubmit() {
-    if (this.form.valid) {
-      this.congeService.ajouterConge(this.form.value).subscribe({
-        next: () => alert('Demande envoyée!'),
-        error: () => alert('Erreur')
-      });
-    }
-  }*/
 
   onSubmit(){
     const employeId = this.authService.getEmployeId();
@@ -56,4 +48,8 @@ export class CongesDemandeComponent {
     });
 
   }
+
+
+
+
 }

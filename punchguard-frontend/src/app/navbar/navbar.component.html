@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar bg-dark shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-white" routerLink="/">PointGuard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      <ul class="navbar-nav ">
+        <!-- Lien visible uniquement si connecté -->
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/pointages/:id">Mes pointages</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/demandeConges">Demander congé</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/congesListe">Mes congés</a>
+        </li>
+
+        <!-- Lien visible uniquement si non connecté -->
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="auth/login">Connexion</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="auth/signup">Inscription</a>
+        </li>
+      </ul>
+
+      <!-- Bouton de déconnexion -->
+      <button class="btn btn-outline-light btn-sm rounded-pill px-3" *ngIf="isLoggedIn" (click)="logout()">Déconnexion</button>
+    </div>
+  </div>
+</nav>
