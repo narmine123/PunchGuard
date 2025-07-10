@@ -8,6 +8,7 @@ import { AffichageComponent } from './affichage/affichage.component';
 import { CongesComponent } from './conges/conges.component';
 import { CongesDemandeComponent } from './conges-demande/conges-demande.component';
 import { CongesListeComponent } from './conges-liste/conges-liste.component';
+import { EmailGuard } from './guards/email.guard';
 
  export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,12 +18,13 @@ import { CongesListeComponent } from './conges-liste/conges-liste.component';
   { path: 'modifier/:id', component: ModifierEmployeComponent },
   { path: 'pointages/:id', component: AffichageComponent },
 
-  { path: 'conges/:id', component: CongesComponent },
+  { path: 'conges/:id', component: CongesListeComponent },
   { path: 'demandeConges', component: CongesDemandeComponent },
-  { path: 'congesListe', component: CongesListeComponent },
+    { path: '**', redirectTo: '' }
+
+  /*{ path: 'congesListe', component: CongesListeComponent },*/
 
 
 
 
-  { path: '**', redirectTo: '' }
 ];

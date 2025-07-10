@@ -1,31 +1,59 @@
 .custom-navbar {
-  background-color: #798aec!important;
-  border-bottom: 1px solid #3a3a5a;
-}
-
-.navbar-nav .nav-link {
-  color: #f0f0f0 !important;
-  font-weight: 500;
-  margin-right: 1rem;
-  transition: color 0.3s;
-}
-
-.navbar-nav .nav-link:hover {
-  color: #9f8fff !important; /* accent violet pour correspondre au bouton */
+  background: linear-gradient(135deg, #7062cc, #798aec) !important; /* Dégradé subtil */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
   font-size: 1.5rem;
-  color: #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.02); /* Effet zoom léger au survol */
+}
+
+.navbar-brand img {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.navbar-brand:hover img {
+  transform: rotate(-5deg); /* Rotation dynamique du logo */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 80%;
+  left: 10%;
 }
 
 .btn-outline-light {
-  border-color: #9f8fff;
-  color: #ffffff;
+  border-width: 2px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
-.btn-outline-light:hover {
-  background-color: #9f8fff;
-  border-color: #9f8fff;
-  color: #fff;
+.navbar-brand img {
+  filter: brightness(1.1) contrast(1.2); /* Améliore la visibilité */
+  object-fit: contain; /* Empêche la déformation */
+  padding: 4px; /* Espace autour du logo */
+  background: rgba(255, 255, 255, 0.1); /* Fond léger si le logo est sombre */
+  backdrop-filter: blur(2px); /* Effet de flou subtil pour le contraste */
 }

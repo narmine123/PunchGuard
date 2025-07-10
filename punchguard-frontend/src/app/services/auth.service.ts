@@ -29,14 +29,14 @@ getEmployeId(): number | null {
 
   try {
     const decoded: any = jwtDecode(token);
+    const email = decoded.sub || decoded.email;
+    localStorage.setItem('email', email);
     return decoded.id;
   } catch (err) {
     console.error("Erreur lors du décodage du token :", err);
     return null;
   }
 }
-
-
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token'); 
@@ -45,6 +45,8 @@ getEmployeId(): number | null {
   logout(): void {
     localStorage.removeItem('token');
   }
+
+
 }
 
 

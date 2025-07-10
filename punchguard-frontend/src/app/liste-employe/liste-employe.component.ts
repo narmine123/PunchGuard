@@ -4,6 +4,8 @@ import { Employe } from '../models/employe.models';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router'; 
+import {jwtDecode} from 'jwt-decode';
+
 
 @Component({
   selector: 'app-liste-employe',
@@ -20,7 +22,9 @@ export class ListeEmployeComponent implements OnInit {
   constructor(private employeService: EmployeeService, public router: Router) {}
 
 
- 
+ role: string | null = null;
+
+
   ngOnInit(): void {
   this.employeService.getEmployes().subscribe({
     next: (data) => {

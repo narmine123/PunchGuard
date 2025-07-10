@@ -1,25 +1,40 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar bg-dark shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold text-white" routerLink="/">PointGuard</a>
+
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <img src="assets/logo-bg.png" alt="Logo PunchGuard" class="me-2" height="45" width="45" />
+      <span class="fw-bold text-white">PunchGuard</span>
+    </a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-      <ul class="navbar-nav ">
-        <!-- Lien visible uniquement si connecté -->
+      <ul class="navbar-nav">
+
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" routerLink="/pointages/:id">Mes pointages</a>
+          <a class="nav-link" *ngIf="email === 'admin@gmail.com'" routerLink="/listeEmploye">Liste Employé</a>
+        </li>
+        
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" [routerLink]="['/pointages', employeId]">Pointages</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" routerLink="/demandeConges">Demander congé</a>
         </li>
+
+<!--
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" routerLink="/congesListe">Mes congés</a>
+          <a class="nav-link" (click)="goToConges()"> congés</a>
+
+        </li>
+-->
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <button class="btn btn-link nav-link" (click)="goToConges()">Congés</button>
         </li>
 
-        <!-- Lien visible uniquement si non connecté -->
         <li class="nav-item" *ngIf="!isLoggedIn">
           <a class="nav-link" routerLink="auth/login">Connexion</a>
         </li>
@@ -28,7 +43,6 @@
         </li>
       </ul>
 
-      <!-- Bouton de déconnexion -->
       <button class="btn btn-outline-light btn-sm rounded-pill px-3" *ngIf="isLoggedIn" (click)="logout()">Déconnexion</button>
     </div>
   </div>

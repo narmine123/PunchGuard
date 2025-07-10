@@ -12,11 +12,11 @@ export class CongesService {
   constructor(private http:HttpClient) { }
 
 
+   getCongesByEmployeId(id: number) {
+    return this.http.get<any[]>(`${this.apiUrl}/ListeConges/${id}`);
+  }
   ajouterConge(conge: Conge):Observable<any>{
     return this.http.post(`${this.apiUrl}/addConges`,conge)
   }
 
-   getCongesByEmployeId(id: number) {
-    return this.http.get<any[]>(`${this.apiUrl}/ListeConges/${id}`);
-  }
 }

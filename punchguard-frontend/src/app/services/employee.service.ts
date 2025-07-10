@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employe } from '../models/employe.models';
+import { Conge } from '../models/conge.models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,10 @@ export class EmployeeService {
 
 
   getEmployeById(id:number):Observable<Employe>{
-    return this.http.get<Employe>(`${this.apiUrl}/ListeEmploye${id}`)
+    return this.http.get<Employe>(`${this.apiUrl}/ListeEmploye/${id}`)
   }
 
+ 
 
 
 }

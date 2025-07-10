@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Component({
@@ -44,7 +45,7 @@ export class LoginComponent {
  
  
     errorMessage: string = '';
-onLogin() {
+/*onLogin() {
   if (!this.loginForm.valid) {
     this.errorMessage = 'Formulaire invalide';
     return;
@@ -68,6 +69,7 @@ onLogin() {
     next: (res) => {
       console.log('La connexion est établie avec succés ');    
       alert('La connexion est établie ');
+      const token = res.token;
       localStorage.setItem('token', res.token); 
       this.router.navigate(['/listeEmploye']);
     },
@@ -77,3 +79,52 @@ onLogin() {
     }
   });
 }}
+*/
+onLogin() {
+  if (!this.loginForm.valid) {
+    this.errorMessage = 'Formulaire invalide';
+    return;
+  }
+    const employeId = this.authService.getEmployeId();
+
+  const email = this.loginForm.get('email')?.value?.trim();
+  const password = this.loginForm.get('password')?.value;
+
+  if (!email || !password) {
+    this.errorMessage = 'Email et mot de passe requis';
+    return;
+  }
+
+  const credentials = { email, password };
+
+  console.log('Données envoyées:', credentials);
+
+  this.authService.login(credentials).subscribe({
+    next: (res) => {
+      console.log('Connexion réussie');
+      alert('Connexion réussie');
+
+      const token = res.token;
+      localStorage.setItem('token', token);
+
+      // Décoder le token pour obtenir l'email
+      const decoded: any = jwtDecode(token);
+      const userEmail = decoded.sub || decoded.email || email;
+
+      // Sauvegarder l'email pour d’autres vérifications (navbar, guards, etc.)
+      localStorage.setItem('email', userEmail);
+
+      // Redirection selon l'email
+      if (userEmail === 'admin@gmail.com') {
+        this.router.navigate(['/listeEmploye']); // admin
+      } else {
+    this.router.navigate(['pointages', employeId]);
+      }
+    },
+    error: (err) => {
+      console.error('Détails de l\'erreur:', err);
+      this.errorMessage = err.error?.message || 'Erreur de connexion';
+    }
+  });
+}
+}

@@ -15,6 +15,8 @@ import {  Router } from '@angular/router';
 })
 export class CongesDemandeComponent {
   form: FormGroup;
+    employeId: number | null = null;
+
 
   constructor(
     private fb: FormBuilder,
@@ -24,23 +26,27 @@ export class CongesDemandeComponent {
     public router:Router
   ) {
     this.form = this.fb.group({
-      employeId:this.authService.getEmployeId(),
+      employeId: null,
       dateDebut: ['', Validators.required],
       dateFin: ['', Validators.required],
       type: ['', Validators.required]
     });
   }
-
+  ngOnInit(): void {
+    this.employeId = this.authService.getEmployeId();
+    if (this.employeId) {
+      this.form.patchValue({ employeId: this.employeId });
+    }
+  }
 
   onSubmit(){
-    const employeId = this.authService.getEmployeId();
 
-    if (!employeId) {
+    if (!this.employeId) {
       alert("Erreur : employeId non trouvé. Veuillez vous reconnecter.");
       return;
     }
 
-    this.form.patchValue({ employeId }); // injecte dans le formulaire
+    this.form.patchValue({ employeId: this.employeId }); // injecte dans le formulaire
 
     this.congeService.ajouterConge(this.form.value).subscribe({
       next: () => alert("Demande de congé envoyée avec succès !"),

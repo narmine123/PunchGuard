@@ -1,17 +1,27 @@
-<h2>Modifier Employé</h2>
-
-<form [formGroup]="employeForm" (ngSubmit)="onSubmit()">
-  <label>Nom:</label>
-  <input type="text" formControlName="nom" /><br />
-
-  <label>Prénom:</label>
-  <input type="text" formControlName="prenom" /><br />
-
-  <label>Email:</label>
-  <input type="email" formControlName="email" /><br />
-
-  <label>Poste:</label>
-  <input type="text" formControlName="poste" /><br />
-
-  <button type="submit">Enregistrer</button>
-</form>
+<div class="employee-form-container">
+  <h2 class="employee-form-title">Modifier Employé</h2>
+  
+  <form [formGroup]="employeForm" (ngSubmit)="onSubmit()">
+    <div class="form-field-group">
+      <label>Nom:</label>
+      <input type="text" formControlName="nom" class="employee-input">
+    </div>
+    
+    <div class="form-field-group">
+      <label>Prénom:</label>
+      <input type="text" formControlName="prenom" class="employee-input">
+    </div>
+    
+    <div class="form-field-group">
+      <label>Email:</label>
+      <input type="email" formControlName="email" class="employee-input">
+    </div>
+    
+    <div class="form-field-group">
+      <label>Poste:</label>
+      <input type="text" formControlName="poste" class="employee-input">
+    </div>
+    
+    <button type="submit" class="submit-btn">Enregistrer</button>
+  </form>
+</div>

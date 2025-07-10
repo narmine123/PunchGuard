@@ -1,46 +1,122 @@
-form {
+/* Conteneur principal */
+.employee-form-container {
   max-width: 500px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(121, 138, 236, 0.15);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  border: 1px solid rgba(121, 138, 236, 0.2);
+  animation: fadeIn 0.5s ease-out;
 }
 
-label {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Titre */
+.employee-form-title {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.employee-form-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #798aec, #6a5acd);
+  border-radius: 2px;
+}
+
+/* Groupes de champs */
+.form-field-group {
+  margin-bottom: 1.8rem;
+  position: relative;
+}
+
+.form-field-group label {
   display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #333;
+  margin-bottom: 0.6rem;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
 }
 
-input[type="text"],
-input[type="email"] {
+/* Champs de formulaire */
+.employee-input {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
+  padding: 0.85rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: #f8fafc;
 }
 
-button[type="submit"] {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background-color: #007bff;
+.employee-input:focus {
+  border-color: #798aec;
+  box-shadow: 0 0 0 4px rgba(121, 138, 236, 0.15);
+  background-color: #fff;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+/* Bouton Submit */
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #798aec, #6a5acd);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-top: 1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-button[type="submit"]:hover {
-  background-color: #0056b3;
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(121, 138, 236, 0.3);
 }
 
-h2{
-padding-left: 500px;
-font-size: 30px;}
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Effet de focus pour les labels */
+.form-field-group:focus-within label {
+  color: #798aec;
+  transform: translateX(5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .employee-form-container {
+    padding: 1.75rem;
+    margin: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .employee-form-title {
+    font-size: 1.5rem;
+  }
+  
+  .employee-input {
+    padding: 0.75rem 1rem;
+  }
+}

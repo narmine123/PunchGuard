@@ -18,12 +18,12 @@
       <p><strong>Email:</strong> {{ selectedEmploye.email }}</p>
       <p><strong>Poste:</strong> {{ selectedEmploye.poste }}</p>
 
-
         <button (click)="router.navigate(['/modifier', selectedEmploye.id])">Modifier</button>
 
         <button (click)="deleteEmploye(selectedEmploye.id)">Supprimer</button>
         <button (click)="router.navigate(['/pointages', selectedEmploye.id])">Pointage</button>
         <button (click)="router.navigate(['/conges', selectedEmploye.id])">Congès</button>
+
 
 
 

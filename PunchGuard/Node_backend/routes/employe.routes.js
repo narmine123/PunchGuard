@@ -6,7 +6,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
-router.get('/ListeEmploye', (req, res) => {
+
+router.get('/ListeEmploye',  (req, res) => {
   pool.query('SELECT * FROM employe', (err, results) => {
     if (err) {
       console.error('Erreur SQL:', err);
@@ -27,8 +28,6 @@ router.get('/ListeEmploye/:id' , (req,res) => {
 
 router.post('/AddEmploye', (req, res) => {
   const { nom, prenom, email, poste, mot_de_passe } = req.body;
-
-  console.log('Requête reçue :', req.body); // Debug
 
   if (!nom || !email || !mot_de_passe) {
     return res.status(400).json({ error: 'Champs requis manquants' });

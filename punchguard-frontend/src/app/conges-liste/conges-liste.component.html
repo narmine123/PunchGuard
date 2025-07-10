@@ -15,8 +15,8 @@
   <tbody>
     <tr *ngFor="let c of conges">
       <td>{{ c.employeId }}</td>
-      <td>{{ c.dateDebut | date:'dd/MM/yyyy HH:mm'  }}</td>
-      <td>{{ c.dateFin | date:'dd/MM/yyyy HH:mm'}}</td>
+      <td>{{ c.dateDebut | date:'dd/MM/yyyy '  }}</td>
+      <td>{{ c.dateFin | date:'dd/MM/yyyy '}}</td>
       <td>{{ c.nombreJours }}</td>
       <td>{{ c.type }}</td>
       <td>{{ c.statut }}</td>
